@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #02102b#02102b;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.AuthenticationController">
+    <children>
+        <AnchorPane focusTraversable="true" layoutX="-5.0" layoutY="85.0" prefHeight="318.0" prefWidth="606.0" style="-fx-background-color: #ffffff#ffffff;">
+            <children>
+                <PasswordField fx:id="passText" layoutX="175.0" layoutY="146.0" prefHeight="15.0" prefWidth="257.0" promptText="Password">
+                    <font>
+                        <Font size="17.0" />
+                    </font>
+                </PasswordField>
+                <TextField fx:id="loginText" layoutX="175.0" layoutY="92.0" prefHeight="27.0" prefWidth="257.0" promptText="login">
+                    <font>
+                        <Font size="17.0" />
+                    </font>
+                </TextField>
+                <Label alignment="CENTER" layoutX="178.0" layoutY="7.0" prefHeight="66.0" prefWidth="257.0" text="Authentication">
+                    <font>
+                        <Font name="Kohinoor Telugu" size="30.0" />
+                    </font>
+                </Label>
+                <Button fx:id="logIn" layoutX="265.0" layoutY="212.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="76.0" style="-fx-background-color: #aba41a#aba41a #aba41a#aba41a;" text="Log in" textFill="#ebe8e8">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Button>
+            </children>
+        </AnchorPane>
+        <Label alignment="CENTER" layoutX="259.0" layoutY="26.0" text="Graph" textFill="#f5f0f0">
+            <font>
+                <Font name="Times New Roman" size="33.0" />
+            </font>
+        </Label>
+        <Button fx:id="signIn" layoutX="491.0" layoutY="13.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="95.0" text="Sign in">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Button>
+    </children>
+</AnchorPane>

@@ -1,4 +1,4 @@
-package sample;
+package reg;
 
 import db.DbManager;
 import javafx.fxml.FXML;
@@ -9,6 +9,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import sample.BaseClass;
+import sample.User;
 
 import java.io.IOException;
 
@@ -44,10 +46,8 @@ public class RegActivityController extends  BaseClass{
                 if(flag){
                     drawAlert("User created successfully");
                     logInButton.getScene().getWindow().hide();
-
-
                     FXMLLoader loader=new FXMLLoader();
-                    loader.setLocation(getClass().getResource("/sample/workActivity.fxml"));
+                    loader.setLocation(getClass().getResource("/Authentication/AuthenticationActivity.fxml"));
 
                     try {
                         loader.load();

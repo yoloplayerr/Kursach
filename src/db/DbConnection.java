@@ -8,7 +8,7 @@ import java.sql.SQLException;
 public final class DbConnection {
 
 	
-	public static Connection Connection_to_my_db_Max()  {
+	public static Connection Connection_to_my_db()  {
 		Connection connection = null;
 
 		try {

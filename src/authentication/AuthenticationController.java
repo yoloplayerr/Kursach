@@ -1,4 +1,4 @@
-package sample;
+package authentication;
 
 import db.DbManager;
 import javafx.fxml.FXML;
@@ -9,11 +9,15 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import sample.BaseClass;
+import sample.User;
+import urlParser.FileDownload;
+import workActivity.WorkController;
 
 import java.io.IOException;
 
 public class AuthenticationController extends BaseClass {
-    boolean flag=false;
+
 
     @FXML
     private PasswordField passText;
@@ -31,14 +35,10 @@ public class AuthenticationController extends BaseClass {
 
     @FXML
     void initialize(){
-
-
             signIn.setOnAction(event -> {
                 signIn.getScene().getWindow().hide();
-
                 FXMLLoader loader=new FXMLLoader();
-                loader.setLocation(getClass().getResource("/sample/regActivity.fxml"));
-
+                loader.setLocation(getClass().getResource("/reg/regActivity.fxml"));
                 try {
                     loader.load();
                 }
@@ -49,34 +49,27 @@ public class AuthenticationController extends BaseClass {
                 Stage stage=new Stage();
                 stage.setScene(new Scene((root)));
                 stage.showAndWait();
-
             });
 
         logIn.setOnAction(event -> {
             DbManager dbManager=new DbManager();
-            for(User usr:dbManager.getUsers()){
-                if(usr.getUserName().equals(loginText.getText()) && usr.getPassword().equals(passText.getText())){
-                    flag=true;
-                }
-            }
-            if (flag==false){
+            if (dbManager.chekUser(loginText.getText(),passText.getText())==false){
                 drawAlert("error");
             }else {
-
                 logIn.getScene().getWindow().hide();
-
-                FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(getClass().getResource("/sample/workActivity.fxml"));
-
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/workActivity/workActivity.fxml"));
+                Parent root = null;
                 try {
-                    loader.load();
+                    root = (Parent)fxmlLoader.load();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                Parent root = loader.getRoot();
-                Stage stage = new Stage();
-                stage.setScene(new Scene((root)));
-                stage.showAndWait();
+                WorkController controller = fxmlLoader.<WorkController>getController();
+                controller.setuName(loginText.getText());
+                Scene scene = new Scene(root);
+                Stage stage=new Stage();
+                stage.setScene(scene);
+                stage.show();
             }
         });
 

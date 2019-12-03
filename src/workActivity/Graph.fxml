@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="889.0" prefWidth="958.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="workActivity.GraphController">
+   <children>
+      <LineChart fx:id="chart" layoutY="-8.0" prefHeight="778.0" prefWidth="997.0">
+        <xAxis>
+          <NumberAxis side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" />
+        </yAxis>
+      </LineChart>
+      <Button fx:id="CloseBtn" layoutX="14.0" layoutY="781.0" mnemonicParsing="false" text="Close" />
+      <Button fx:id="OpenBtn" layoutX="81.0" layoutY="781.0" mnemonicParsing="false" text="Open" />
+      <Button fx:id="HighBtn" layoutX="148.0" layoutY="781.0" mnemonicParsing="false" text="High" />
+      <Button fx:id="LowBtn" layoutX="207.0" layoutY="781.0" mnemonicParsing="false" text="Low" />
+      <Button fx:id="clearBtn" layoutX="885.0" layoutY="770.0" mnemonicParsing="false" text="clear" />
+   </children>
+</AnchorPane>

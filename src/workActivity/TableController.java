@@ -1,8 +1,4 @@
-package sample;
-
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
+package workActivity;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,8 +9,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import sample.User;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 public class TableController {
     private ObservableList<User> usersData = FXCollections.observableArrayList();
@@ -48,7 +48,7 @@ public class TableController {
             BackBtn.getScene().getWindow().hide();
 
             FXMLLoader loader=new FXMLLoader();
-            loader.setLocation(getClass().getResource("/sample/workActivity.fxml"));
+            loader.setLocation(getClass().getResource("/workActivity/workActivity.fxml"));
 
             try {
                 loader.load();

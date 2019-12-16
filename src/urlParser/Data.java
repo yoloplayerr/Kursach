@@ -28,16 +28,12 @@ public class Data {
         switch (v) {
             case ("Open"):
                 return getOpenValue();
-
             case ("Close"):
                 return getCloseValue();
-
             case ("Low"):
                 return getLowValue();
-
             case ("High"):
                 return getHighValue();
-
             default:
                 return 0;
 

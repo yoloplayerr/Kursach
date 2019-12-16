@@ -65,7 +65,7 @@ public class AuthenticationController extends BaseClass {
                     e.printStackTrace();
                 }
                 WorkController controller = fxmlLoader.<WorkController>getController();
-                controller.setuName(loginText.getText());
+                controller.setUserName(loginText.getText());
                 Scene scene = new Scene(root);
                 Stage stage=new Stage();
                 stage.setScene(scene);

@@ -126,6 +126,7 @@ public class DbManager {
             e.printStackTrace();
         } finally {
             try {
+
                 if (stmt != null)
                     stmt.close();
                 if (res != null)
@@ -179,6 +180,73 @@ public class DbManager {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+     public static void insertResults(String login,String data,String funcName){
+        Connection conn = null;
+        ResultSet res = null;
+        PreparedStatement stmt = null;
+        String line = "";
+        String cvsSplitBy = ";";
+        String date = "";
+        try {
+            conn = DbConnection.Connection_to_my_db();
+
+            stmt = conn.prepareStatement("insert into results values(default,?,?,?)");
+            stmt.setString(1,login);
+            stmt.setString(2,funcName);
+            stmt.setString(3,data);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }  finally {
+            try {
+
+                if (stmt != null)
+                    stmt.close();
+                if (res != null)
+                    res.close();
+                if (conn != null)
+                    conn.close();
+            } catch (SQLException e) {
+
+            }
+
+        }
+
+    }
+    public static void insertLogs(String login,String data){
+        Connection conn = null;
+        ResultSet res = null;
+        PreparedStatement stmt = null;
+        String line = "";
+        String cvsSplitBy = ";";
+        String date = "";
+        try {
+            conn = DbConnection.Connection_to_my_db();
+
+            stmt = conn.prepareStatement("insert into logs values(default,?,?,?)");
+            stmt.setString(1,login);
+            stmt.setDate(2,new Date(System.currentTimeMillis()));
+            stmt.setString(3,data);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }  finally {
+            try {
+
+                if (stmt != null)
+                    stmt.close();
+                if (res != null)
+                    res.close();
+                if (conn != null)
+                    conn.close();
+            } catch (SQLException e) {
+
+            }
+
+        }
+
     }
 
 }

@@ -3,6 +3,11 @@ package sample;
 import javafx.scene.control.Alert;
 
 public class BaseClass {
+    public String userName;
+
+    public void setUserName(String uName) {
+        this.userName = uName;
+    }
     /**
      * Окошко с message
      * @param message

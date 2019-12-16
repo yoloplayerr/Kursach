@@ -134,7 +134,6 @@ public class GraphController extends BaseClass {
         }
         DbManager.insertResults(userName,"sqr","a="+data[0]+",b="+data[1]+",c="+data[2]);
         series.setName("MNK Sqr");
-        chart.setCreateSymbols(false);
         chart.getData().add(series);
     }
 
@@ -145,9 +144,7 @@ public class GraphController extends BaseClass {
             series.getData().add(new XYChart.Data<>(i, Math.exp(data[0]) * Math.exp(data[1] * i)));
         }
         DbManager.insertResults(userName,"exp","a="+data[0]+",b="+data[1]);
-        System.out.println("a="+data[0]+",b="+data[1]);
         series.setName("MNK Exp");
-        chart.setCreateSymbols(false);
         chart.getData().add(series);
     }
 
@@ -158,7 +155,6 @@ public class GraphController extends BaseClass {
         series.getData().add(new XYChart.Data<>(dataList.size(), (dataList.size()) * data[0] + data[1]));
         DbManager.insertResults(userName,"line","a="+data[0]+",b="+data[1]);
         series.setName("MNK Line");
-        chart.setCreateSymbols(false);
         chart.getData().add(series);
     }
     private void drawHyp(String valueType) {
@@ -169,7 +165,6 @@ public class GraphController extends BaseClass {
         }
         DbManager.insertResults(userName,"hyp","a="+data[0]+",b="+data[1]);
         series.setName("MNK ");
-        chart.setCreateSymbols(false);
         chart.getData().add(series);
     }
 

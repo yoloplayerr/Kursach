@@ -14,6 +14,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import sample.BaseClass;
 import urlParser.FileDownload;
+import urlParser.Parser;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,14 +22,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class WorkController extends BaseClass {
+
     final FileChooser fil_chooser = new FileChooser();
-
-    public static void setuName(String uName) {
-        WorkController.uName = uName;
-    }
-
-    public static String uName;
-
     @FXML
     private ResourceBundle resources;
 
@@ -57,24 +52,23 @@ public class WorkController extends BaseClass {
         showDataPage();
         selectFiles();
         downloadData();
-
-
     }
 
     private void showDataPage() {
         DataBtn.setOnAction(event -> {
             DataBtn.getScene().getWindow().hide();
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/workActivity/table.fxml"));
-
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/workActivity/table.fxml"));
+            Parent root = null;
             try {
-                loader.load();
+                root = (Parent)fxmlLoader.load();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            Parent root = loader.getRoot();
-            Stage stage = new Stage();
-            stage.setScene(new Scene((root)));
+            TableController controller = fxmlLoader.<TableController>getController();
+            controller.setUserName(userName);
+            Scene scene = new Scene(root);
+            Stage stage=new Stage();
+            stage.setScene(scene);
             stage.show();
         });
 
@@ -84,7 +78,7 @@ public class WorkController extends BaseClass {
     private void showGraph() {
         graphBtn.setOnAction(event -> {
             graphBtn.getScene().getWindow().hide();
-           System.out.println(graphBtn.getText());
+
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/workActivity/graph.fxml"));
             Parent root = null;
             try {
@@ -93,7 +87,7 @@ public class WorkController extends BaseClass {
                 e.printStackTrace();
             }
             GraphController controller = fxmlLoader.<GraphController>getController();
-            controller.setUserName(uName);
+            controller.setUserName(userName);
             Scene scene = new Scene(root);
             Stage stage=new Stage();
             stage.setScene(scene);
@@ -103,7 +97,13 @@ public class WorkController extends BaseClass {
 
     private void downloadData() {
         downloadBtn.setOnAction(event -> {
-            FileDownload fileDownload = new FileDownload(urlField.getText(), uName);
+            FileDownload fileDownload = new FileDownload();
+            if(fileDownload.fileDownload(urlField.getText(),userName)){
+                DbManager.insertLogs(userName,"Пользователь скачал данные");
+                drawAlert("Данные скачены");
+            }else{
+                drawAlert("Файл уже существует");
+            }
         });
     }
 
@@ -112,6 +112,11 @@ public class WorkController extends BaseClass {
             @Override
             public void handle(ActionEvent event) {
                 File file = fil_chooser.showOpenDialog(fileChooser.getScene().getWindow());
+                Parser parser=new Parser();
+                if(parser.parser(userName,file)){
+                    DbManager.insertLogs(userName,"Пользователь загрузил данные");
+                    drawAlert("Данные успешно загружены");
+                }
             }
         });
     }

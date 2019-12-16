@@ -8,26 +8,26 @@ import java.net.URL;
 import java.nio.file.Files;
 
 public class FileDownload {
-    public FileDownload(String URL, String userName) {
-        fileDowndload(URL, userName);
-    }
 
-    private void fileDowndload(String URL, String userName) {
+
+    public boolean fileDownload(String URL, String userName) {
         try {
-            File file = new File("/Users/maxim/Desktop/text.csv");
+            File file = new File("/Users/maxim/Desktop/text"+userName+".csv");
             if (!file.exists()) {
                 URL url = new URL(URL);
                 InputStream inputStream = url.openStream();
                 Files.copy(inputStream, new File("/Users/maxim/" +
-                        "Desktop/text.csv").toPath());
+                        "Desktop/text"+userName+".csv").toPath());
+                inputStream.close();
+                return true;
             } else {
                 System.out.println("Файл уже существует");
             }
-            Parser parser = new Parser(userName);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return false;
     }
 }

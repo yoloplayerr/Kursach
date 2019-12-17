@@ -171,6 +171,37 @@ public class DbManager {
         }
         return dataList;
     }
+    public static ArrayList<Data> getData(String username,Date from,Date until) {
+        ArrayList<Data> dataList = new ArrayList<>();
+        Connection conn = null;
+        ResultSet res = null;
+        PreparedStatement stmt = null;
+        Data data;
+        try {
+            conn = DbConnection.Connection_to_my_db();
+            stmt = conn.prepareStatement("select*from datavalue where currentdate between "+"'"+from+"'"+" and "+"'"+until+"'"+" and username="+"'"+username+"'");
+            res = stmt.executeQuery();
+            while (res.next()) {
+                data = new Data(res.getString("ticker"), res.getString("per"), res.getString("currentdate"), res.getFloat("openvalue"), res.getFloat("lowvalue"), res.getFloat("highvalue"), res.getFloat("closevalue"));
+                dataList.add(data);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        } finally {
+            try {
+                if (stmt != null)
+                    stmt.close();
+                if (res != null)
+                    res.close();
+                if (conn != null)
+                    conn.close();
+            } catch (SQLException e) {
+
+            }
+        }
+        return dataList;
+    }
+
 
     private static void deleteRows(Connection conn, PreparedStatement stmt,String userName) {
         try {
@@ -227,7 +258,7 @@ public class DbManager {
 
             stmt = conn.prepareStatement("insert into logs values(default,?,?,?)");
             stmt.setString(1,login);
-            stmt.setDate(2,new Date(System.currentTimeMillis()));
+            stmt.setTimestamp(2,new Timestamp(System.currentTimeMillis()));
             stmt.setString(3,data);
             stmt.executeUpdate();
         } catch (SQLException e) {

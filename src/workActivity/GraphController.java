@@ -107,14 +107,14 @@ public class GraphController extends BaseClass {
         series = new XYChart.Series<>();
         int i = 0;
         if (datePickerFrom.getValue() != null && datePickerUntil.getValue() != null) {
+            dataList=DbManager.getData(userName,Date.valueOf(datePickerFrom.getValue()),Date.valueOf(datePickerUntil.getValue()));
             for (Data d : dataList) {
-                if (Date.valueOf(datePickerFrom.getValue()).getTime() < Date.valueOf(d.getDate()).getTime() && Date.valueOf(datePickerUntil.getValue()).getTime() > Date.valueOf(d.getDate()).getTime()) {
                     series.getData().add(new XYChart.Data<>(i, d.value(valueType)));
                     i++;
-                }
             }
         } else {
             for (Data d : dataList) {
+                dataList=DbManager.getData(userName);
                 series.getData().add(new XYChart.Data<>(i, d.value(valueType)));
                 i++;
             }

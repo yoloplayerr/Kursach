@@ -18,7 +18,7 @@ import java.io.IOException;
 
 public class AuthenticationController extends BaseClass {
 
-
+    //Вот тут значит какой то комментарий
     @FXML
     private PasswordField passText;
 
